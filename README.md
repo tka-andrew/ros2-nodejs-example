@@ -14,3 +14,8 @@ This is a minimal example of nodeJS that uses rclnodejs to create a publisher to
 ```
 npm start
 ```
+
+## Notes
+1. You can refer to node_modules/rclnodejs/types/interfaces.d.ts and see what are the available messages. For example, you can look for "namespace geometry_msgs"->"namespace msg"->"export interface Twist" and see the interface of geometry_msgs/msg/Twist.
+
+2. You can then use "rclnodejs.createMessageObject('geometry_msgs/msg/Twist');" to create a message object, and then use that to edit the twistMsg.linear and twistMsg.angular
