@@ -12,6 +12,12 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3",
-    "nodemon": "^2.0.15"
+    "get-symbol-from-current-process-h": "^1.0.2",
+    "http": "0.0.1-security",
+    "int64-napi": "^2.0.9",
+    "node-addon-api": "^4.3.0",
+    "node-gyp": "^9.0.0",
+    "nodemon": "^2.0.15",
+    "rclnodejs": "github:RobotWebTools/rclnodejs#develop"
   }
 }
