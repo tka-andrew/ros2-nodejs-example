@@ -28,68 +28,10 @@ app.get('/', (req, res) => {
   res.send({ data: 'Hello World!' })
 })
 
-app.get('/turtlesim/up', (req, res) => {
-  let twistMsg = rclnodejs.createMessageObject('geometry_msgs/msg/Twist');
-  twistMsg.linear = {
-    x: 2.0,
-    y: 0.0,
-    z: 0.0
-  }
-  twistMsg.angular = {
-    x: 0.0,
-    y: 0.0,
-    z: 0.0
-  }
+app.post('/turtlesim/cmd_vel', (req, res) => {
+  const twistMsg = req.body;
+  console.log("Publishing TwistMsg: ", req.body)
   turtlesimVelocityPub.publish(twistMsg)
-  res.send({ data: twistMsg})
-})
-
-app.get('/turtlesim/down', (req, res) => {
-  let twistMsg = rclnodejs.createMessageObject('geometry_msgs/msg/Twist');
-  twistMsg.linear = {
-    x: -2.0,
-    y: 0.0,
-    z: 0.0
-  }
-  twistMsg.angular = {
-    x: 0.0,
-    y: 0.0,
-    z: 0.0
-  }
-  turtlesimVelocityPub.publish(twistMsg)
-  res.send({ data: twistMsg})
-})
-
-app.get('/turtlesim/left', (req, res) => {
-  let twistMsg = rclnodejs.createMessageObject('geometry_msgs/msg/Twist');
-  twistMsg.linear = {
-    x: 0.0,
-    y: 0.0,
-    z: 0.0
-  }
-  twistMsg.angular = {
-    x: 0.0,
-    y: 0.0,
-    z: 2.0
-  }
-  turtlesimVelocityPub.publish(twistMsg)
-  res.send({ data: twistMsg})
-})
-
-app.get('/turtlesim/right', (req, res) => {
-  let twistMsg = rclnodejs.createMessageObject('geometry_msgs/msg/Twist');
-  twistMsg.linear = {
-    x: 0.0,
-    y: 0.0,
-    z: 0.0
-  }
-  twistMsg.angular = {
-    x: 0.0,
-    y: 0.0,
-    z: -2.0
-  }
-  turtlesimVelocityPub.publish(twistMsg)
-  res.send({ data: twistMsg})
 })
 
 app.listen(port, () => {
