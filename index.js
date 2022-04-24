@@ -12,26 +12,29 @@ var corsOptions = {
 }
 app.use(bodyParser.json())
 app.use(cors(corsOptions))
-var turtlesimVelocityPub
-
+var turtle1VelocityPub
+var turtle1CurrentPose
 const rclnodejs = require('rclnodejs');
 rclnodejs.init().then(() => {
   const node = new rclnodejs.Node('publisher_example_node');
   var stringPublisher = node.createPublisher('std_msgs/msg/String', 'talker');
   stringPublisher.publish(`Hello ROS 2 from rclnodejs`);
   
-  turtlesimVelocityPub = node.createPublisher('geometry_msgs/msg/Twist', 'turtle1/cmd_vel');
+  turtle1VelocityPub = node.createPublisher('geometry_msgs/msg/Twist', 'turtle1/cmd_vel');
+  node.createSubscription('turtlesim/msg/Pose', 'turtle1/pose', (msg) => {
+    turtle1CurrentPose = msg;
+  });
   node.spin();
 });
-  
-app.get('/', (req, res) => {
-  res.send({ data: 'Hello World!' })
+
+app.get('/turtlesim/pose', (req, res) => {
+  res.send({ data: turtle1CurrentPose })
 })
 
 app.post('/turtlesim/cmd_vel', (req, res) => {
   const twistMsg = req.body;
-  console.log("Publishing TwistMsg: ", req.body)
-  turtlesimVelocityPub.publish(twistMsg)
+  console.log("Publishing TwistMsg: \n", req.body)
+  turtle1VelocityPub.publish(twistMsg)
 })
 
 app.listen(port, () => {

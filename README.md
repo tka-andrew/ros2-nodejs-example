@@ -19,3 +19,5 @@ npm start
 1. You can refer to node_modules/rclnodejs/types/interfaces.d.ts and see what are the available messages. For example, you can look for "namespace geometry_msgs"->"namespace msg"->"export interface Twist" and see the interface of geometry_msgs/msg/Twist.
 
 2. You can then use "rclnodejs.createMessageObject('geometry_msgs/msg/Twist');" to create a message object, and then use that to edit the twistMsg.linear and twistMsg.angular
+
+3. You may also refer to the [official examples](https://github.com/RobotWebTools/rclnodejs/tree/develop/example) of rclnodejs.
